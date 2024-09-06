@@ -2,12 +2,21 @@ package org.example;
 
 import org.example.exceptions.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LandMines {
 
     private final char mineSymbol = 'M';
     private final char clearSymbol = '-';
+
+    private static final int STARTING_X_POS = 0;
+    private static final int STARTING_Y_POS = 0;
+
+    private static int fieldCounter = 0;
+
 
 
 
@@ -51,37 +60,74 @@ public class LandMines {
             }
         }
 
-        //FLOODFILL
+        mineField.getField(new Position(STARTING_X_POS, STARTING_Y_POS)).setVisited(true);
 
 
+        floodfill(mineField.getFields(), new Position(STARTING_X_POS,STARTING_Y_POS), EDirection.FIRST);
 
+        System.out.println("Field Counter = " + fieldCounter);
 
-
-
-
-
-
-
-        return layout.length;
+        return fieldCounter;
     }
 
 
 
     //TODO position might just be (0,0)
-    //TODO prohibited logic (!visited && row/column has M)
-    private  void floodfill(Map<Position, Field> mineField, Position position){
-        boolean prohibited = false;
+    private void floodfill(Map<Position, Field> mineField, Position position, EDirection direction){
         if(!mineField.containsKey(position) || mineField.get(position).isMined() ||
-        prohibited) {
+                isDangerous(mineField,position,direction)) {
             return;
         }
+        fieldCounter++;
         mineField.remove(position);
+        //TODO isVisited = true useless?
 
-        floodfill(mineField, new Position(position.getPosX(), position.getPosY() - 1));
-        floodfill(mineField, new Position(position.getPosX(), position.getPosY() + 1));
-        floodfill(mineField, new Position(position.getPosX() - 1, position.getPosY()));
-        floodfill(mineField, new Position(position.getPosX() + 1, position.getPosY()));
+        floodfill(mineField, new Position(position.getPosX(), position.getPosY() - 1), EDirection.NORTH);
+        floodfill(mineField, new Position(position.getPosX(), position.getPosY() + 1), EDirection.SOUTH);
+        floodfill(mineField, new Position(position.getPosX() - 1, position.getPosY()), EDirection.WEST);
+        floodfill(mineField, new Position(position.getPosX() + 1, position.getPosY()), EDirection.EAST);
 
+    }
+
+    private boolean isDangerous(Map<Position, Field> mineField,Position position, EDirection direction) {
+
+        if(mineField.get(position).isVisited()){
+            return false;
+        }
+
+        List<Field> fields = new ArrayList<>();
+        switch (direction) {
+            case NORTH -> {
+                for(Field field : mineField.values()){
+                    if(field.getPosition().getPosX() == position.getPosX() && field.getPosition().getPosY() < position.getPosY()){
+                        fields.add(field);
+                    }
+                }
+            }
+            case SOUTH -> {
+                for(Field field : mineField.values()){
+                    if(field.getPosition().getPosX() == position.getPosX() && field.getPosition().getPosY() > position.getPosY()){
+                        fields.add(field);
+                    }
+                }
+            }
+            case WEST -> {
+                for(Field field : mineField.values()){
+                    if(field.getPosition().getPosX() < position.getPosX() && field.getPosition().getPosY() == position.getPosY()){
+                        fields.add(field);
+                    }
+                }
+            }
+            case EAST -> {
+                for(Field field : mineField.values()){
+                    if(field.getPosition().getPosX() > position.getPosX() && field.getPosition().getPosY() == position.getPosY()){
+                        fields.add(field);
+                    }
+                }
+            }
+            case FIRST -> fields.add(mineField.get(position)); //TODO could be better
+        }
+        return fields.stream().anyMatch(Field::isMined);
     }
 
 

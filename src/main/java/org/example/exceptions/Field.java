@@ -35,4 +35,13 @@ public class Field {
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "position=" + position +
+                ", isMined=" + isMined +
+                ", isVisited=" + isVisited +
+                '}';
+    }
 }
