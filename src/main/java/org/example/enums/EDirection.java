@@ -1,9 +1,9 @@
-package org.example;
+package org.example.enums;
 
 public enum EDirection {
     EAST,
     WEST,
     NORTH,
     SOUTH,
-    FIRST //TODO better name
+    FIRST
 }

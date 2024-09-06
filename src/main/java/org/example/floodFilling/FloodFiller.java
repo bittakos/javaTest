@@ -1,16 +1,17 @@
 package org.example.floodFilling;
 
-import org.example.EDirection;
-import org.example.exceptions.Field;
-import org.example.exceptions.Position;
+import org.example.enums.EDirection;
+import org.example.mineFieldMap.Field;
+import org.example.mineFieldMap.Position;
 
 import java.util.Map;
 
 public class FloodFiller {
     public static int floodfill(Map<Position, Field> mineField, Position position, EDirection direction) {
-        return floodfill(mineField, position, direction, 0);
+        return processFloodfill(mineField, position, direction, 0);
     }
-    private static int floodfill(Map<Position, Field> mineField, Position position, EDirection direction, int fieldCounter) {
+    // Added extra private function to separate fieldCounter values between tests
+    private static int processFloodfill(Map<Position, Field> mineField, Position position, EDirection direction, int fieldCounter) {
         if (!mineField.containsKey(position) || mineField.get(position).isMined() ||
                 DangerChecker.isDangerous(mineField, position, direction)) {
             return fieldCounter;
@@ -19,10 +20,10 @@ public class FloodFiller {
         fieldCounter++;
         mineField.remove(position);
 
-        fieldCounter = floodfill(mineField, new Position(position.getPosX(), position.getPosY() - 1), EDirection.NORTH, fieldCounter);
-        fieldCounter = floodfill(mineField, new Position(position.getPosX(), position.getPosY() + 1), EDirection.SOUTH, fieldCounter);
-        fieldCounter = floodfill(mineField, new Position(position.getPosX() - 1, position.getPosY()), EDirection.WEST, fieldCounter);
-        fieldCounter = floodfill(mineField, new Position(position.getPosX() + 1, position.getPosY()), EDirection.EAST, fieldCounter);
+        fieldCounter = processFloodfill(mineField, new Position(position.posX(), position.posY() - 1), EDirection.NORTH, fieldCounter);
+        fieldCounter = processFloodfill(mineField, new Position(position.posX(), position.posY() + 1), EDirection.SOUTH, fieldCounter);
+        fieldCounter = processFloodfill(mineField, new Position(position.posX() - 1, position.posY()), EDirection.WEST, fieldCounter);
+        fieldCounter = processFloodfill(mineField, new Position(position.posX() + 1, position.posY()), EDirection.EAST, fieldCounter);
 
         return fieldCounter;
     }

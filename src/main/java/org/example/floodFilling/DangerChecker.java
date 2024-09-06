@@ -1,8 +1,8 @@
 package org.example.floodFilling;
 
-import org.example.EDirection;
-import org.example.exceptions.Field;
-import org.example.exceptions.Position;
+import org.example.enums.EDirection;
+import org.example.mineFieldMap.Field;
+import org.example.mineFieldMap.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,28 +15,28 @@ public class DangerChecker {
         switch (direction) {
             case NORTH -> {
                 for(Field field : mineField.values()){
-                    if(field.getPosition().getPosX() == position.getPosX() && field.getPosition().getPosY() < position.getPosY()){
+                    if(field.getPosition().posX() == position.posX() && field.getPosition().posY() < position.posY()){
                         fields.add(field);
                     }
                 }
             }
             case SOUTH -> {
                 for(Field field : mineField.values()){
-                    if(field.getPosition().getPosX() == position.getPosX() && field.getPosition().getPosY() > position.getPosY()){
+                    if(field.getPosition().posX() == position.posX() && field.getPosition().posY() > position.posY()){
                         fields.add(field);
                     }
                 }
             }
             case WEST -> {
                 for(Field field : mineField.values()){
-                    if(field.getPosition().getPosX() < position.getPosX() && field.getPosition().getPosY() == position.getPosY()){
+                    if(field.getPosition().posX() < position.posX() && field.getPosition().posY() == position.posY()){
                         fields.add(field);
                     }
                 }
             }
             case EAST -> {
                 for(Field field : mineField.values()){
-                    if(field.getPosition().getPosX() > position.getPosX() && field.getPosition().getPosY() == position.getPosY()){
+                    if(field.getPosition().posX() > position.posX() && field.getPosition().posY() == position.posY()){
                         fields.add(field);
                     }
                 }

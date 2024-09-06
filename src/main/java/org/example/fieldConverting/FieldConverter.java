@@ -1,8 +1,8 @@
 package org.example.fieldConverting;
 
-import org.example.exceptions.Field;
-import org.example.exceptions.MineField;
-import org.example.exceptions.Position;
+import org.example.mineFieldMap.Field;
+import org.example.mineFieldMap.MineField;
+import org.example.mineFieldMap.Position;
 
 public class FieldConverter {
     public static MineField convertField(String[] layout){

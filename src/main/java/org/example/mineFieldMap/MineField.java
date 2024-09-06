@@ -1,10 +1,10 @@
-package org.example.exceptions;
+package org.example.mineFieldMap;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MineField {
-    private Map<Position, Field> fields;
+    private final Map<Position, Field> fields;
 
     public MineField() {
         this.fields = new HashMap<>();
@@ -12,10 +12,6 @@ public class MineField {
 
     public void addField(Field field){
         fields.put(field.getPosition(), field);
-    }
-
-    public Field getField(Position position){
-        return fields.get(position);
     }
 
     public Map<Position, Field> getFields() {

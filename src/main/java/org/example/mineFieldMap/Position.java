@@ -1,23 +1,6 @@
-package org.example.exceptions;
+package org.example.mineFieldMap;
 
-import java.util.Objects;
-
-public class Position {
-    private int posX;
-    private int posY;
-
-    public Position(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-    }
-
-    public int getPosX() {
-        return posX;
-    }
-
-    public int getPosY() {
-        return posY;
-    }
+public record Position(int posX, int posY) {
 
     @Override
     public boolean equals(Object o) {
@@ -25,11 +8,6 @@ public class Position {
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
         return posX == position.posX && posY == position.posY;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(posX, posY);
     }
 
     @Override
