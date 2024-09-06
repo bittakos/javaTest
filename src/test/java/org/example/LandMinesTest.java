@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LandMinesTest {
 
     @Test
-    void whenInvalidStartingField_thenThrowException(){
+    void whenInvalidStartingField_thenThrowsException(){
         String row = "M--";
         String[] layout = {row};
         LandMines landMines = new LandMines();
@@ -43,7 +43,7 @@ class LandMinesTest {
     }
 
     @Test
-    void whenInvalidLayoutSize_thenThrowException() {
+    void whenInvalidLayoutSize_thenThrowsException() {
         String row0 = "--";
         String row1 = "--";
         String row2 = "--";
@@ -54,7 +54,7 @@ class LandMinesTest {
 
 
     @Test
-    void exampleTestCase1_thenReturns1() {
+    void exampleTestCase1_shouldReturn1() {
         String row0 = "-M-";
         String row1 = "---";
         String row2 = "M--";
@@ -64,7 +64,7 @@ class LandMinesTest {
     }
 
     @Test
-    void exampleTestCase2_thenReturns3(){
+    void exampleTestCase2_shouldReturn3(){
         String row0 = "-M-";
         String row1 = "-M-";
         String row2 = "--M";
@@ -74,7 +74,7 @@ class LandMinesTest {
     }
 
     @Test
-    void exampleTestCase3_thenReturns12(){
+    void exampleTestCase3_shouldReturn12(){
         String row0 = "--M-";
         String row1 = "-MM-";
         String row2 = "----";
@@ -85,7 +85,7 @@ class LandMinesTest {
     }
 
     @Test
-    void exampleTestCase4_thenReturns21(){
+    void exampleTestCase4_shouldReturn21(){
         String row0 = "-----";
         String row1 = "--M-M";
         String row2 = "-----";
