@@ -2,14 +2,14 @@ package org.example.exceptions;
 
 public class Field {
 
+    //TODO remove needless sets
+
     private Position position;
     boolean isMined;
-    boolean isVisited;
 
-    public Field(Position position, boolean isMined, boolean isVisited) {
+    public Field(Position position, boolean isMined) {
         this.position = position;
-        this.isMined = isMined;
-        this.isVisited = isVisited;
+        this.isMined = isMined;;
     }
 
     public Position getPosition() {
@@ -28,20 +28,11 @@ public class Field {
         isMined = mined;
     }
 
-    public boolean isVisited() {
-        return isVisited;
-    }
-
-    public void setVisited(boolean visited) {
-        isVisited = visited;
-    }
-
     @Override
     public String toString() {
         return "Field{" +
                 "position=" + position +
                 ", isMined=" + isMined +
-                ", isVisited=" + isVisited +
                 '}';
     }
 }
